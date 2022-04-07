@@ -1,0 +1,21 @@
+.container-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    height: 70%;
+    box-shadow: 0px 6px 6px 4px rgba(149,149,149,0.42);
+    background-color: white;
+
+}
+
+.title-body{
+    height: 10%;
+    width: 100%;
+    padding-left: 10%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    text-align: left;
+}

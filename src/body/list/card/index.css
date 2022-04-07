@@ -1,0 +1,21 @@
+.container-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    border-top: 1px solid lightgrey;
+    width: 100%;
+}
+
+.subcontainer-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 25%;
+}
+
+.subcontainer-card p{
+    text-align: left;
+    width: 80%;
+}
