@@ -2,7 +2,7 @@ import {  createSlice } from '@reduxjs/toolkit';
 
 
 const initialState = {
-    status: 'All',
+    status: "All",
     colors: []
 };
 
@@ -11,14 +11,16 @@ export const filterSlice = createSlice({
     initialState,
     reducers:{
         statusFilter(state, action){
-            state.status = action.payload
+            state.status = action.payload.status
         }, 
         statusColor(state, action){
-            if(action.payload.changeType === "add"){
+            const check = state.colors.some((color)=> color === action.payload.color)
+            if(check){
+                state.colors = state.colors.filter((colr)=> colr !== action.payload.color)
+            }else{
                 state.colors.push(action.payload.color)
-            }else if(action.payload.changeType){
-                state.colors.pull(action.payload.color)
             }
+            
         }
     }
 })

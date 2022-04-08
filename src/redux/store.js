@@ -2,11 +2,21 @@ import { configureStore } from '@reduxjs/toolkit';
 import todoReducer from '../features/todoSlice';
 import filterReducer from '../features/filterSlice';
 
-
-export default configureStore({
+const rootReducer = {
   
-    reducer: {
-      todos: todoReducer, 
-      filter: filterReducer
-    },
-  }, console.log("store"));
+  reducer: {
+    todos: todoReducer, 
+    filter: filterReducer
+  },
+}
+
+let preloadedState
+const persistedTodosString = localStorage.getItem('todos')
+
+if (persistedTodosString) {
+  preloadedState = {
+    todos: JSON.parse(persistedTodosString)
+  }
+}
+
+export default configureStore(rootReducer, preloadedState);

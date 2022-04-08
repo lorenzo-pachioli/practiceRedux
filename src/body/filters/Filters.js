@@ -1,18 +1,21 @@
 import React from 'react';
-import { useSelector} from 'react-redux'
+import { useSelector, useDispatch} from 'react-redux'
+import {todoCleared, todoCompleted} from '../../features/todoSlice';
+import {statusFilter, statusColor } from '../../features/filterSlice';
 import './index.css';
 
 function Filters() {
 
   const list = useSelector((state) => state.todos)
+  const dispatch = useDispatch();
 
   return (
     <div className="container-filter">
 
       <div  className="sub-container-filter">
         <h5>Actions </h5>
-        <button>Mark all completed</button>
-        <button>Clear all completed</button>
+        <button onClick={(e)=>dispatch(todoCompleted())}>Mark all completed</button>
+        <button onClick={(e)=>dispatch(todoCleared())}>Clear all completed</button>
       </div>
 
       <div  className="sub-container-filter">
@@ -23,31 +26,31 @@ function Filters() {
       <div  className="sub-container-filter">
         <h5>Filter by status</h5>
         <select name='status' id='status'>
-          <option value="All">All</option>
-          <option value="Active">Active</option>
-          <option value="Completed">Completed</option>
+          <option value="All" onClick={(e)=>dispatch(statusFilter({status: "All"}))}>All</option>
+          <option value="Active" onClick={(e)=>dispatch(statusFilter({status: "Active"}))}>Active</option>
+          <option value="Completed" onClick={(e)=>dispatch(statusFilter({status: "Completed"}))}>Completed</option>
         </select>
       </div>
 
       <div  className="sub-container-filter colors">
         <h5>Filter by color</h5>
         <div>
-          <input type='checkbox' id="red"/>
+          <input type='checkbox' id="red" value="red" onChange={(e)=>dispatch(statusColor({color: "red"}))}/>
           <label htmlFor="red">Red</label>
         </div>
         
         <div>
-          <input type='checkbox' id="orange"/>
+          <input type='checkbox' id="orange" onChange={(e)=>dispatch(statusColor({color: "orange"}))}/>
           <label htmlFor="orange">Orange</label>
         </div>
         
         <div>
-          <input type='checkbox' id="yellow"/>
+          <input type='checkbox' id="yellow" onChange={(e)=>dispatch(statusColor({color: "yellow"}))}/>
           <label htmlFor="yellow">Yellow</label>
         </div>
         
         <div>
-          <input type='checkbox' id="green"/>
+          <input type='checkbox' id="green" onChange={(e)=>dispatch(statusColor({color: "green"}))}/>
           <label htmlFor="green">Green</label>
         </div>
         

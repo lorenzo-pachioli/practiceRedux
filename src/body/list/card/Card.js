@@ -6,7 +6,8 @@ import './index.css';
 function Card({text, color, completed, id}) {
 
   const dispatch = useDispatch();
-  console.log(completed)
+  
+  
   return (
     <div className="container-card">
       <div className='subcontainer-card'>
@@ -16,6 +17,7 @@ function Card({text, color, completed, id}) {
         
       <div className='subcontainer-card'>
         <select name='colors' id='colors' defaultValue={color}>
+            <option value='' onClick={(e)=>dispatch(todoColorSelected({id:id,color: e.target.value}))}>None</option>
             <option value='red' onClick={(e)=>dispatch(todoColorSelected({id:id,color: e.target.value}))}>Red</option>
             <option value='orange' onClick={(e)=>dispatch(todoColorSelected({id:id,color: e.target.value}))}>orange</option>
             <option value='yellow'onClick={(e)=>dispatch(todoColorSelected({id:id,color: e.target.value}))}>yellow</option>

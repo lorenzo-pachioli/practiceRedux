@@ -25,7 +25,7 @@ function Body() {
         id:nextTodoId(list),
         text:e.target.value,
         completed:false, 
-        color:"red"
+        color:""
       }))
     }
   }
