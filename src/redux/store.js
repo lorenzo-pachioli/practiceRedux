@@ -9,14 +9,5 @@ const rootReducer = {
     filter: filterReducer
   },
 }
+export default configureStore(rootReducer);
 
-let preloadedState
-const persistedTodosString = localStorage.getItem('todos')
-
-if (persistedTodosString) {
-  preloadedState = {
-    todos: JSON.parse(persistedTodosString)
-  }
-}
-
-export default configureStore(rootReducer, preloadedState);

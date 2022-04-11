@@ -1,16 +1,32 @@
-import {  createSlice } from '@reduxjs/toolkit';
+import {  createSlice, createAsyncThunk  } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
+import getColections, { setDocument} from '../services/operators';
 
 
 
-
-/* export const incrementAsync = createAsyncThunk(
-  'counter/fetchCount',
-  async (amount) => {
-    const response = await fetchCount(amount);
-    // The value we return becomes the `fulfilled` action payload
-    return response.data;
+export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
+  try{
+    const docRef = await getColections("tasks")
+      console.log("app docRef:", docRef)
+      docRef.map((task) => {
+        return useDispatch(todoAdded(task))
+      })
+  }catch (error){
+    console.error(`recuest faild`);
   }
-); */
+})
+
+/* export const saveNewTodo = createAsyncThunk('todos/saveNewTodo', async text => {
+  const initialTodo = { 
+    text: text, 
+    color: "", 
+    completed:false
+  }
+  const response = await setDocument("tasks", initialTodo)
+  return response
+}); */
+
+
 
 export const todoSlice = createSlice({
   name: 'todos',
@@ -18,14 +34,20 @@ export const todoSlice = createSlice({
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     todoAdded(state, action){
-      console.log(state)
-      state.push(action.payload)
+      return [
+        ...state, 
+        {
+          text: action.payload.text,
+          color:"",
+          completed: false, 
+          id: action.payload.id
+        }
+      ]
     },
     todoToggled(state, action){
       const todos = state.find(todo => todo.id === action.payload.id)
       const position = state.indexOf(todos)
       todos.completed = !todos.completed
-      console.log(todos.completed)
       state.splice(position,1,todos)
     },
     todoDelete(state, action){
@@ -44,12 +66,31 @@ export const todoSlice = createSlice({
     todoCleared(state){
       state.map((todo) =>  todo.completed = false )
     }
+  },
+  extraReducers: builder => {
+    builder
+      .addCase(fetchTodos.pending, (state) => {
+        return 'loading'
+      })
+      .addCase(fetchTodos.fulfilled, (state, action) => {
+        let newEntities = [];
+        newEntities = action.payload
+        console.log(newEntities)
+        return [
+          ...state, 
+          newEntities
+        ]
+      })/* 
+      .addCase(saveNewTodo.fulfilled, (state, action) => {
+        const todo = action.payload
+        state.push(todo)
+      }) */
   }
+  
 });
 
-export const {todoAdded, todoToggled,todoDelete, todoColorSelected, todoCompleted, todoCleared } = todoSlice.actions;
+export const {todoAdded, todoToggled,todoDelete, todoColorSelected, todoCompleted, todoCleared, todoUpDate } = todoSlice.actions;
 
 
 
-console.log(todoSlice.reducer)
 export default todoSlice.reducer;

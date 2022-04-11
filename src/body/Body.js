@@ -1,32 +1,31 @@
 import React, {useState} from 'react';
 import List from './list/List';
 import Filters from './filters/Filters';
-import { useDispatch, useSelector} from 'react-redux';
+import { useDispatch} from 'react-redux';
 import {todoAdded} from '../features/todoSlice';
+import store from '../redux/store';
 import './index.css';
 
 function Body() {
 
   const dispatch = useDispatch();
-  const list = useSelector((state) => state.todos)
   const [task, setTask] = useState('')
   
-  function nextTodoId(todos) {
+  /* function nextTodoId(todos) {
     const maxId = todos.reduce((maxId, todo) => Math.max(todo.id, maxId), -1)
     return maxId + 1
-  }
+  } */
 
-  const handeleEnter = (e) => {
-    console.log(e.keyCode)
+  const handeleEnter =  (e) => {
     if(e.keyCode === 13){
-      console.log(e.target)
+      const data = store.getState();
+      const id = data.todos.length + 1
+      const obj = {
+        id:id,
+        text:e.target.value
+      }
       setTask("");
-      return dispatch(todoAdded({
-        id:nextTodoId(list),
-        text:e.target.value,
-        completed:false, 
-        color:""
-      }))
+      dispatch(todoAdded(obj))
     }
   }
 
