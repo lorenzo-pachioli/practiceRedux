@@ -9,20 +9,23 @@ function Card({text, color, completed, id}) {
   const dispatch = useDispatch();
   
   const handleDelete = async () => {
-    const docRef = await deleteDocument("tasks", id)
     dispatch(todoDelete({id:id}))
+    const docRef = await deleteDocument("tasks", id)
+    
     return docRef;
   }
 
   const handleComplete = async () => {
-    const docRef = await update("tasks", id, {completed: !completed})
     dispatch(todoToggled({id:id}))
+    const docRef = await update("tasks", id, {completed: !completed})
+    
     return docRef;
   }
 
   const handleColor = async (e) => {
-    const docRef = await update("tasks", id, {color: e.target.value})
     dispatch(todoColorSelected({id:id,color: e.target.value}))
+    const docRef = await update("tasks", id, {color: e.target.value})
+    
     return docRef;
   }
 

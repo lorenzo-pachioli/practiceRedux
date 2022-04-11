@@ -1,4 +1,4 @@
-import {collection, getDocs, getDoc, addDoc, deleteDoc , doc, updateDoc, setDoc,  arrayUnion, arrayRemove } from 'firebase/firestore/lite';
+import {collection, getDocs,  addDoc, deleteDoc , doc, updateDoc, setDoc } from 'firebase/firestore/lite';
 import {db} from "./firebase";
 
 export default async function getColections(coll){

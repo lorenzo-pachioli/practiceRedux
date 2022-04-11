@@ -14,8 +14,6 @@ export default function List() {
 
     let list2 = [];
 
-    
-    if(list){
 
       /* Filtro por color */
       if(filters.colors.length > 0){
@@ -31,10 +29,8 @@ export default function List() {
         list2 = list2.filter((task) => task.completed === false)
       }else if(filters.status === "Completed"){
         list2 =  list2.filter((task) => task.completed === true)
-      }else{ 
-        list2 = list
       }
-    } 
+    
 
       if (list2.length > 0){
       return (list2.map((task)=>{

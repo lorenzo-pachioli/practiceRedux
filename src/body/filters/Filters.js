@@ -3,19 +3,35 @@ import { useSelector, useDispatch} from 'react-redux'
 import {todoCleared, todoCompleted} from '../../features/todoSlice';
 import {statusFilter, statusColor } from '../../features/filterSlice';
 import './index.css';
+import { update } from '../../services/operators';
 
 function Filters() {
 
   const list = useSelector((state) => state.todos)
   const dispatch = useDispatch();
 
+  const handleCompleted = ()=> {
+    dispatch(todoCompleted())
+    list.map(async (task)=> {
+      const docRef = await update("tasks", task.id, {completed: true})
+      return docRef;
+    })
+  }
+  const handleCleared = ()=> {
+    dispatch(todoCleared())
+    list.map(async (task)=> {
+      const docRef = await update("tasks", task.id, {completed: false})
+      return docRef;
+    })
+  }
+
   return (
     <div className="container-filter">
 
       <div  className="sub-container-filter">
         <h5>Actions </h5>
-        <button onClick={(e)=>dispatch(todoCompleted())}>Mark all completed</button>
-        <button onClick={(e)=>dispatch(todoCleared())}>Clear all completed</button>
+        <button onClick={handleCompleted}>Mark all completed</button>
+        <button onClick={handleCleared}>Clear all completed</button>
       </div>
 
       <div  className="sub-container-filter">
