@@ -28,3 +28,8 @@ export async function deleteDocument(coll, id){
   const docRef = await deleteDoc(doc(db, coll, id));
   return docRef;
 }
+
+export async function update(coll, id, data){
+  const docRef = await updateDoc(doc(db, coll, id), data);
+  return docRef;
+}
