@@ -38,14 +38,14 @@ function Card({text, color, completed, id}) {
       </div>
         
       <div className='subcontainer-card'>
-        <select name='colors' id='colors' defaultValue={color}>
+        <select name='colors' id='colors' defaultValue={color} style={{color:`${color}`, fontWeight: "800"}}>
             <option value='' onClick={handleColor}>None</option>
-            <option value='red' onClick={handleColor}>Red</option>
-            <option value='orange' onClick={handleColor}>orange</option>
-            <option value='yellow'onClick={handleColor}>yellow</option>
-            <option value='green'onClick={handleColor}>green</option>
+            <option value='#F50D5A' onClick={handleColor}>Red</option>
+            <option value='#FF865C' onClick={handleColor}>orange</option>
+            <option value='#FFEA5C' onClick={handleColor}>yellow</option>
+            <option value='#00DA76' onClick={handleColor}>green</option>
         </select>
-        <button onClick={handleDelete}>X</button>
+        <button onClick={handleDelete} color="#F50D5A">X</button>
       </div>
         
     </div>

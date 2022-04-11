@@ -24,6 +24,11 @@
     border-radius: 5%;
     border-style: none;
 }
+
+.sub-container-filter button:hover{
+    width:105%;
+    height: 20%;
+}
 .sub-container-filter p{
     margin: 0;
 }
@@ -36,4 +41,11 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+
+
+.colors div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

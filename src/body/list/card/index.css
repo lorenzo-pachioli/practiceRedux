@@ -13,9 +13,48 @@
     justify-content: space-between;
     align-items: baseline;
     width: 25%;
+    box-sizing: border-box;
 }
 
 .subcontainer-card p{
     text-align: left;
     width: 80%;
+}
+
+.subcontainer-card button{
+    background-color: #F50D5A;
+    color: white;
+    border-style: none;
+    border-radius: 20%;
+    margin-right: 10px;
+}
+
+.subcontainer-card button:hover{
+    width: 8%;
+    height: 20px;
+}
+
+.subcontainer-card input{
+    margin-left: 10px;
+}
+
+
+
+
+#colors option:nth-child(2){
+    color:#F50D5A;
+    font-weight: 800;
+}
+#colors option:nth-child(3){
+    color:#FF865C;
+    font-weight: 800;
+    background-color: default;
+}
+#colors option:nth-child(4){
+    color:#FFEA5C;
+    font-weight: 800;
+}
+#colors option:nth-child(5){
+    color:#00DA76;
+    font-weight: 800;
 }

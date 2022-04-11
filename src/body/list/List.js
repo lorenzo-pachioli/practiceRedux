@@ -11,7 +11,6 @@ export default function List() {
   
 
   const ShoWResults = ()=> {
-
     let list2 = [];
 
 
@@ -35,7 +34,7 @@ export default function List() {
       if (list2.length > 0){
       return (list2.map((task)=>{
         return (
-          <Card text={task.text} key={list.indexOf(task)} color={task.color} completed={task.completed} id={task.id}/>
+          <Card text={task.text} key={list.indexOf(task)} color={task.color} completed={task.completed} order={task.order} id={task.id}/>
         )
       }) )
       }else{

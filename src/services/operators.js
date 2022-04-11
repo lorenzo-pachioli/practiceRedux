@@ -9,9 +9,11 @@ export default async function getColections(coll){
       text:doc.data().text,
       color:doc.data().color,
       completed:doc.data().completed,
-      id:doc.id
+      id:doc.id, 
+      order:doc.data().order
     }});
-    return data;
+    const result = data.sort((a,b)=> a.order - b.order)
+    return result;
 }
 
 export async function setData(coll, id, data){

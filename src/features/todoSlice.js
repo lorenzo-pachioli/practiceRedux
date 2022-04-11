@@ -10,8 +10,8 @@ export const todoSlice = createSlice({
         ...state, 
         {
           text: action.payload.text,
-          color:"",
-          completed: false, 
+          color:action.payload.color,
+          completed: action.payload.completed, 
           id: action.payload.id
         }
       ]

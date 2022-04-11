@@ -16,13 +16,13 @@ function App() {
         const docRef = await getColections("tasks")
         const data1 = store.getState()
         const list = data1.todos 
+
         if(list.length === 0){
-          /* console.log("app docRef:", docRef)
-          console.log("app list:", list) */
           docRef.map((task) => {
             return dispach(todoAdded(task));
           })
         }
+        
       }catch (error){
         console.error(`recuest faild`);
       }
