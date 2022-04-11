@@ -23,3 +23,8 @@ export async function setDocument(coll, data){
   const docRef = await addDoc(collection(db, coll), data);
   return docRef;
 }
+
+export async function deleteDocument(coll, id){
+  const docRef = await deleteDoc(doc(db, coll, id));
+  return docRef;
+}

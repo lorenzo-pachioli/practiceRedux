@@ -5,6 +5,7 @@ import { useDispatch} from 'react-redux';
 import {todoAdded} from '../features/todoSlice';
 import store from '../redux/store';
 import './index.css';
+import { setDocument } from '../services/operators';
 
 function Body() {
 
@@ -16,16 +17,17 @@ function Body() {
     return maxId + 1
   } */
 
-  const handeleEnter =  (e) => {
+  const handeleEnter = async (e) => {
     if(e.keyCode === 13){
-      const data = store.getState();
-      const id = data.todos.length + 1
+      
       const obj = {
-        id:id,
-        text:e.target.value
+        text:e.target.value, 
+        color:"",
+        completed: false
       }
+      const docRef = await setDocument("tasks", obj)
       setTask("");
-      dispatch(todoAdded(obj))
+      dispatch(todoAdded({...obj, id:docRef.id,}))
     }
   }
 

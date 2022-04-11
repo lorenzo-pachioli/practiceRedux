@@ -2,11 +2,17 @@ import React from 'react';
 import { useDispatch} from 'react-redux';
 import {todoToggled,todoDelete, todoColorSelected} from '../../../features/todoSlice';
 import './index.css';
+import { deleteDocument } from '../../../services/operators';
 
 function Card({text, color, completed, id}) {
 
   const dispatch = useDispatch();
   
+  const handleDelete = async (e) => {
+    const docRef = await deleteDocument("tasks", id)
+    dispatch(todoDelete({id:id}))
+    return docRef;
+  }
   
   return (
     <div className="container-card">
@@ -23,7 +29,7 @@ function Card({text, color, completed, id}) {
             <option value='yellow'onClick={(e)=>dispatch(todoColorSelected({id:id,color: e.target.value}))}>yellow</option>
             <option value='green'onClick={(e)=>dispatch(todoColorSelected({id:id,color: e.target.value}))}>green</option>
         </select>
-        <button onClick={(e)=>dispatch(todoDelete({id:id}))}>X</button>
+        <button onClick={handleDelete}>X</button>
       </div>
         
     </div>
