@@ -11,10 +11,9 @@ function Body() {
 
   const dispatch = useDispatch();
   const [task, setTask] = useState('')
-  
 
-  const handeleEnter = async (e) => {
-    if(e.keyCode === 13){
+  const handleEnter = async (e) => {
+    if(e.keyCode === 13 ){
       const data= store.getState()
       const order = data.todos.length + 1
       const obj = {
@@ -23,16 +22,18 @@ function Body() {
         completed: false, 
         order: order
       }
+      
       const docRef = await setDocument("tasks", obj)
-      setTask("");
       dispatch(todoAdded({...obj, id:docRef.id,}))
+      setTask("");
+      
     }
   }
 
   
   return (
     <div className="container-body">
-      <input type="text" value={task} id='task' className='title-body' onChange={(e) =>setTask(e.target.value)} onKeyDown={handeleEnter} placeholder='What needs to be done?' />
+      <input type="text" className='title-body' value={task} id='task'  onChange={(e) =>setTask(e.target.value)} onKeyDown={handleEnter} placeholder='What needs to be done?' />
       <List />
       <Filters />
     </div>
